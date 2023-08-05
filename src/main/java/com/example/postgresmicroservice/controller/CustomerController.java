@@ -1,23 +1,20 @@
 package com.example.postgresmicroservice.controller;
 import com.example.postgresmicroservice.dto.request.CustomerRequest;
 import com.example.postgresmicroservice.dto.response.CustomerResponse;
-import com.example.postgresmicroservice.service.implService.CustomerService;
+import com.example.postgresmicroservice.service.impl.CustomerService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/customers")
 public class CustomerController {
 
     private final CustomerService customerService;
-
-    public CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
-    }
 
     @PostMapping("/create")
     public ResponseEntity<CustomerResponse> createCustomer(@RequestBody CustomerRequest request) {
@@ -26,12 +23,12 @@ public class CustomerController {
 
     @GetMapping
     public ResponseEntity<List<CustomerResponse>> getAllCustomer(){
-        return ResponseEntity.status(HttpStatus.OK).body(customerService.getAllCustomer());
+        return ResponseEntity.ok(customerService.getAllCustomer());
     }
 
-    @GetMapping("/get-customer/{customerId}")
-    public ResponseEntity<CustomerResponse> getCustomer(@PathVariable Long customerId){
-        return ResponseEntity.status(HttpStatus.OK).body(customerService.getCustomerById(customerId));
+    @GetMapping("/get-customer")
+    public ResponseEntity<CustomerResponse> getCustomer(@RequestHeader Long customerId){
+        return ResponseEntity.ok(customerService.getCustomerById(customerId));
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.postgresmicroservice.dto.response;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +13,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerResponse implements Serializable {
+@Builder
+public class CustomerResponse {
 
     private Long id;
 
@@ -25,7 +27,5 @@ public class CustomerResponse implements Serializable {
     private String gsmNumber;
 
     private BigDecimal balance;
-
-    //private List<TransactionResponse>
 
 }

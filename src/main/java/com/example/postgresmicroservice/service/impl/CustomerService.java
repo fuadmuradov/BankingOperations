@@ -1,4 +1,4 @@
-package com.example.postgresmicroservice.service.implService;
+package com.example.postgresmicroservice.service.impl;
 
 import com.example.postgresmicroservice.dto.request.CustomerRequest;
 import com.example.postgresmicroservice.dto.response.CustomerResponse;

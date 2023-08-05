@@ -5,28 +5,19 @@ import com.example.postgresmicroservice.entity.Customer;
 import com.example.postgresmicroservice.entity.Transaction;
 import com.example.postgresmicroservice.enums.TransactionTypeEnum;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
-public class TransactionMapper implements Serializable {
+public class TransactionMapper {
     public static TransactionResponse toResponse(Transaction transaction){
-        TransactionResponse trResponse = new TransactionResponse();
-        trResponse.setId(transaction.getId());
-        trResponse.setAmount(transaction.getAmount());
-        trResponse.setType(transaction.getType());
-        trResponse.setCustomerId(transaction.getCustomer().getId());
-        trResponse.setTransactionDate(transaction.getTransactionDate());
-        return trResponse;
+        return TransactionResponse.builder()
+                .id(transaction.getId())
+                .amount(transaction.getAmount())
+                .type(transaction.getType())
+                .customerId(transaction.getCustomer().getId())
+                .transactionDate(transaction.getTransactionDate())
+                .build();
     }
 
-    public static Transaction getTransactioForDB(Customer customer, BigDecimal amount, TransactionTypeEnum type, boolean isRefunded) {
-        Transaction transaction = new Transaction();
-        transaction.setTransactionDate(new Date());
-        transaction.setAmount(amount);
-        transaction.setCustomer(customer);
-        transaction.setType(type);
-        transaction.setIsRefunded(isRefunded);
-        return transaction;
-    }
+
 }
